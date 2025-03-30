@@ -1,6 +1,7 @@
 import { DestroyRef, inject, Injectable } from '@angular/core';
 import { BehaviorSubject, filter, firstValueFrom, Subject } from 'rxjs';
 import { WorkerInMsg, WorkerOutMsg } from './wasm.worker';
+import { BASE_URL } from './app.config';
 
 @Injectable({ providedIn: 'root' })
 export class FactorialService {
@@ -9,7 +10,7 @@ export class FactorialService {
   private res$ = new Subject<
     Extract<WorkerOutMsg, { type: 'factorialResult' | 'factorialError' }>
   >();
-  private url = 'http://localhost:3000/wasm/factorial.wasm';
+  private url = `${inject(BASE_URL)}/wasm/factorial.wasm`;
 
   constructor() {
     this.worker = new Worker(new URL('./wasm.worker', import.meta.url));
