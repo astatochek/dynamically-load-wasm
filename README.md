@@ -2,7 +2,7 @@
 
 ## TODO
 
-- [ ] Check client & server can communicate
+- [x] Check client & server can communicate
 - [ ] Add c code and compile it to wasm
 - [ ] Add endpoint to serve wasm on the server
 - [ ] Set up a worker to the angular web-app
