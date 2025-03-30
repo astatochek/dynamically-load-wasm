@@ -1,6 +1,7 @@
 import { Component, inject, resource } from '@angular/core';
 import { Http } from './http';
 import { JsonPipe } from '@angular/common';
+import { FactorialService } from './factorial.service';
 
 @Component({
   selector: 'app-root',
@@ -17,20 +18,16 @@ import { JsonPipe } from '@angular/common';
 export class AppComponent {
   http = inject(Http);
 
+  factorial = inject(FactorialService);
+
   query = resource({ loader: () => this.http.getHello() });
 
   constructor() {
-    this.getWasm();
+    this.test();
   }
 
-  async getWasm() {
-    const wasm = await this.http.getWasmFactorial();
-
-    const { instance } = await WebAssembly.instantiateStreaming(wasm);
-
-    const factorial = (n: number) =>
-      Number((instance.exports['factorial'] as any)(n));
-
-    console.log(factorial(6));
+  async test() {
+    const res = await this.factorial.calculate(6);
+    console.log(res);
   }
 }
