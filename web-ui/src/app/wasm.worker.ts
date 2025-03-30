@@ -26,9 +26,13 @@ async function loadWasmModule(wasmUrl: string) {
     const { instance } = await WebAssembly.instantiateStreaming(wasm);
     wasmInstance = instance;
 
-    wasmFactorialFunction = (n: number) =>
-      Number((instance.exports['factorial'] as any)(n));
-
+    wasmFactorialFunction = (n: number) => {
+      const res = Number((instance.exports['factorial'] as any)(n));
+      if (res === 0) {
+        throw 'Wasm function error';
+      }
+      return res;
+    };
     postWorkerMsg({ type: 'wasmLoaded' });
   } catch (err) {
     postWorkerMsg({ type: 'wasmLoadError' });

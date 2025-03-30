@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { DestroyRef, inject, Injectable } from '@angular/core';
 import { BehaviorSubject, filter, firstValueFrom, Subject } from 'rxjs';
 import { WorkerInMsg, WorkerOutMsg } from './wasm.worker';
 
@@ -31,6 +31,8 @@ export class FactorialService {
     };
 
     this.post({ type: 'loadWasm', wasmUrl: this.url });
+
+    inject(DestroyRef).onDestroy(() => this.worker?.terminate());
   }
 
   async calculate(num: number): Promise<number> {
