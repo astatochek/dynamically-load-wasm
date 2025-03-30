@@ -4,11 +4,14 @@ import { firstValueFrom } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class Http {
-  private start = 'http://localhost:3000/';
+  private start = 'http://localhost:3000';
   private http = inject(HttpClient);
+
   getHello() {
-    return firstValueFrom(
-      this.http.get('http://localhost:3000/hello', { responseType: 'text' }),
-    );
+    return firstValueFrom(this.http.get(`${this.start}`));
+  }
+
+  getWasmFactorial() {
+    return fetch(`${this.start}/wasm/factorial.wasm`);
   }
 }

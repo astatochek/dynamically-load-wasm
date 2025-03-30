@@ -9,7 +9,7 @@ import { JsonPipe } from '@angular/common';
     } @else if (query.error()) {
       {{ query.error() | json }}
     } @else if (query.hasValue()) {
-      {{ query.value() }}
+      {{ query.value() | json }}
     }`,
   standalone: true,
   imports: [JsonPipe],
@@ -18,4 +18,19 @@ export class AppComponent {
   http = inject(Http);
 
   query = resource({ loader: () => this.http.getHello() });
+
+  constructor() {
+    this.getWasm();
+  }
+
+  async getWasm() {
+    const wasm = await this.http.getWasmFactorial();
+
+    const { instance } = await WebAssembly.instantiateStreaming(wasm);
+
+    const factorial = (n: number) =>
+      Number((instance.exports['factorial'] as any)(n));
+
+    console.log(factorial(6));
+  }
 }
