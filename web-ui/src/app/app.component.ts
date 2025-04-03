@@ -30,7 +30,7 @@ import { FactorialService } from './factorial.service';
               value="5"
               min="1"
               max="20"
-              class="w-full px-4 py-2 rounded-md bg-sumiInk2 text-oldWhite border border-sumiInk4 focus:outline-none focus:ring-2 focus:ring-crystalBlue"
+              class="w-full px-4 py-2 rounded-md bg-sumiInk2 text-oldWhite border border-sumiInk4 focus:outline-none focus:ring-2 focus:ring-crystalBlue [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
               placeholder="Enter a number"
             />
           </div>
