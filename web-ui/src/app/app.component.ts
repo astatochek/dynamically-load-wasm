@@ -77,9 +77,4 @@ export class AppComponent {
     },
     defaultValue: '...',
   });
-
-  onSibmit(event: SubmitEvent, value: number) {
-    event.preventDefault();
-    this.num.set(value);
-  }
 }
