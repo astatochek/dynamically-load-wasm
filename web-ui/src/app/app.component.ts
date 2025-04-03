@@ -5,7 +5,7 @@ import { FactorialService } from './factorial.service';
   selector: 'app-root',
   standalone: true,
   template: `
-    <main class="min-h-screen flex items-center justify-center bg-sumiInk1">
+    <main class="min-h-screen flex items-center justify-center">
       <div
         class="w-full max-w-md p-8 rounded-lg shadow-xl bg-sumiInk0 border-2 border-oniViolet"
       >
